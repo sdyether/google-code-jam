@@ -22,29 +22,26 @@ end
 
 def solve(test_no, numwords, length, words)
 	
-
 	if ( length == 1 || numwords == 1)
 		return out_string(test_no, '-')
 	end
 	
-	
-	
-	words.each do |w|
-		target_chars = []
-		counter = w.length - 1
-		while counter > 0
+	target_chars = []
+		
+	counter = length - 1
+	while counter > 0
+		words.each do |w|
 			target_chars = target_chars(words, counter, target_chars)
 
 			target_chars.each do |c|
-				str = w.slice(0..(counter-1)) + c
+				str = w.slice(0...counter) + c
 				if valid_word?( str, words)
 					return out_string(test_no, str)
 				end
 			end
-
-			counter = counter - 1
-
 		end
+		counter = counter - 1
+	
 	end
 	return out_string(test_no, '-')
 end
