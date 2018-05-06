@@ -22,6 +22,7 @@ end
 
 def solve(test_no, numwords, length, words)
 	
+	#early exits
 	if ( length == 1 || numwords == 1)
 		return out_string(test_no, '-')
 	end
@@ -30,9 +31,10 @@ def solve(test_no, numwords, length, words)
 		
 	counter = length - 1
 	while counter > 0
+		target_chars = target_chars(words, counter, target_chars)
+		
 		words.each do |w|
-			target_chars = target_chars(words, counter, target_chars)
-
+			#puts "Solving case ##{test_no}, counter is #{counter}, word is #{w}, targets are #{target_chars.to_s}" 
 			target_chars.each do |c|
 				str = w.slice(0...counter) + c
 				if valid_word?( str, words)
@@ -40,9 +42,10 @@ def solve(test_no, numwords, length, words)
 				end
 			end
 		end
+		
 		counter = counter - 1
-	
 	end
+	
 	return out_string(test_no, '-')
 end
 
